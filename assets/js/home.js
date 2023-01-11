@@ -25,7 +25,6 @@ fetch('https://api.pokemontcg.io/v2/sets/'+ setId).then((response) => response.j
 getSet();
 
 
-<<<<<<< Updated upstream
 
 var poke1 = document.getElementById('pokemon1')
 
@@ -46,8 +45,6 @@ poke1.innerHTML = pokeFetch;
 
 //getPokemon();
 // https://pokeapi.co/api/v2/pokemon/{id or name}/
-=======
-}
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -71,4 +68,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   
   });
->>>>>>> Stashed changes

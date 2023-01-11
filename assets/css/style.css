@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  outline: 1px solid red;
 }
 
 body {
@@ -10,3 +11,10 @@ body {
   font-size: 16px;
 }
 
+#set {
+    width: 300px;
+}
+
+#packImage {
+    height: 430px;
+}

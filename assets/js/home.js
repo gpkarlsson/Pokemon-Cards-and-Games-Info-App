@@ -37,7 +37,7 @@ fetchPoke();
 
 console.log(pokeFetch);
 
-// EXAMPLE OF GETTING DATA FROM API AND DISPLAYING TO PAGE - FOLLOW LINK FOR STEPS
+// EXAMPLE OF GETTING DATA FROM API USING FETCH AND DISPLAYING TO PAGE - FOLLOW LINK FOR STEPS
 
 // https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data#:~:text=How%20To%20Use%20the%20JavaScript%20Fetch%20API%20to,3%20Step%203%20%E2%80%94%20Handling%20POST%20Requests%20
 

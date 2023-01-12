@@ -38,6 +38,7 @@ fetchPoke();
 console.log(pokeFetch);
 
 // EXAMPLE OF GETTING DATA FROM API USING FETCH AND DISPLAYING TO PAGE - FOLLOW LINK FOR STEPS
+//both APIs return data as object, either figure out how to pull and display data from object or convert to an array (entries) then pull and display data
 
 //getPokemon();
 // https://pokeapi.co/api/v2/pokemon/{id or name}/
@@ -65,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   });
 // https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data#:~:text=How%20To%20Use%20the%20JavaScript%20Fetch%20API%20to,3%20Step%203%20%E2%80%94%20Handling%20POST%20Requests%20
+// be sure to read the comments to fix typos in the main article
 
 // const ul = document.getElementById('authors')
 //     const list = document.createDocumentFragment();

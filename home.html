@@ -12,7 +12,7 @@
 
 <body>
   <header>
-<!-- 
+    <!-- 
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         </a>
@@ -68,16 +68,29 @@
   </header>
 
   <main>
+    <!-- Search Bar -->
     <form id="search-form">
       <input id="searchBar" class="input is-normal" type="text" placeholder="Search for Pokemon Here!">
       <button type="submit" class="btn">Click Me</button>
     </form>
+
+    <div id="error" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="box">
+          <p id="errorContent"></p>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
     <div>
       <section id="cardResults"></section>
       <section id="pokeResults"></section>
     </div>
+
     <section id="cardSets" class="columns">
-      <a href="#" id="" class="column set"><img src="https://images.pokemontcg.io/base1/logo.png" alt=""
+      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/base1/logo.png" alt=""
           class="column image"><img src="./assets/images/baseSet.png" alt="" class="packImage" id="packImageBase1"
           class="column image"></a>
       <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/col1/logo.png" alt=""
@@ -87,8 +100,8 @@
           class="column image"><img src="./assets/images/dragonVault.png" alt="" class="packImage" id="packImageDv1"
           class="column image"></a>
       <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/ex5/logo.png" alt=""
-          class="column image"><img src="./assets/images/exHiddenLegends.png" alt="" class="packImage"
-          id="packImageNeo1" class="column image"></a>
+          class="column image"><img src="./assets/images/exHiddenLegends.png" alt="" class="packImage" id="packImageNeo1" 
+          class="column image"></a>
       <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/neo1/logo.png" alt=""
           class="column image"><img src="./assets/images/neoGenesis.png" alt="" class="packImage" id="packImageEx5"
           class="column image"></a>

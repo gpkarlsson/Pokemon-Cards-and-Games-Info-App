@@ -1,21 +1,14 @@
-var pokeName
-var pokedexNumber
-var pokeHeight
-var pokeWeight
-var pokeGen
 var searchBar = document.getElementById('searchBar');
 var tcgCardSets = document.getElementById('cardSets');
+var pokeContainer = document.querySelector('#pokeResults');
 
-var pokeGameInput
 
-const pokeBaseUrl = `https://pokeapi.co/api/v2`;
+var pokeBaseUrl = `https://pokeapi.co/api/v2`;
 // name, number, type, 
 
 const tcgBaseUrl = `https://api.pokemontcg.io/v2`;
 //cards (*image*), card sets (base, 
 
-fetch(`https://pokeapi.co/api/v2/berry-flavor/sweet/`).then((response) => response.json())
-  .then((data) => console.log(data));
 
 function getSet() {
   var setId = 'swsh1' //placeholder, change to be result of user input
@@ -25,17 +18,73 @@ function getSet() {
 getSet();
 
 
-var pokemonName = [];
-var pokeFetch = fetchPoke();
+
+var pokemon;
 
 function fetchPoke() {
-  fetch(pokeBaseUrl + '/pokemon' + '/charizard').then((response) => response.json())
-    .then((data) => console.log(data));
+
+  fetch(pokeBaseUrl + '/pokemon' + '/charizard')
+    .then((response) => response.json())
+    .then ((data) => {
+      pokemon = (data);
+    })
+    .then(() => console.log(pokemon))
+    .then(() => console.log((pokemon).name))
+    .then(function () {
+      renderPokeResultsCard();
+    });
 }
+
+// Function for results display
+function renderPokeResultsCard () {
+  var pokeName = (pokemon).name;
+  var pokeImgUrl = (pokemon).sprites.front_default;
+  var pokedexNumber = (pokemon).id;
+  var pokeHeight = (pokemon).height;
+  var pokeWeight = (pokemon).weight;
+  var pokeGen = (pokemon).generation.name;
+  
+  var card = document.pokeResults.createElement('div');
+  var cardBody = document.pokeResults.createElement('div');
+  var nameHeading = document.pokeResults.createElement('h2');
+  var numberHeading = document.pokeResults.createElement('h3');
+  var pokeImg = document.pokeResults.createElement('img');
+  var heightEl = document.pokeResults.createElement('p');
+  var weightEl = document.pokeResults.createElement('p');
+  var genEl = document.pokeResults.createElement('p');
+  
+  card.setAttribute('class', 'box');
+  cardBody.setAttribute('class', 'box');
+  card.append(cardBody);
+  
+  //nameHeading.setAttribute();
+  //numberHeading.setAttribute();
+  //heightEl.setAttribute();
+  //weightEl.setAttribute();
+  //genEl.setAttribute();
+  
+  nameHeading.textContent = (pokeName);
+  numberHeading.textContent = (pokedexNumber);
+  pokeImg.setAttribute('src', );
+  pokeImg.setAttribute('alt', 'Front default sprite');
+  //pokeImg.setAttribute('class',);
+  heightEl.textContent = 'Height: ' + (pokeHeight);
+  weightEl.textContent = 'Weight: ' + (pokeWeight);
+  genEl.textContent = (pokeGen);
+  cardBody.append(pokeImg);
+  cardBody.append(nameHeading);
+  cardBody.append(numberHeading);
+  cardBody.append(heightEl);
+  cardBody.append(weightEl);
+  cardBody.append(genEl);
+  
+  //pokeContainer.innerHTML = '';
+  pokeContainer.append(card);
+  }
+  
 
 fetchPoke();
 
-console.log(pokeFetch);
 
 // EXAMPLE OF GETTING DATA FROM API USING FETCH AND DISPLAYING TO PAGE - FOLLOW LINK FOR STEPS
 //both APIs return data as object, either figure out how to pull and display data from object or convert to an array (entries) then pull and display data

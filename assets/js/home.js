@@ -5,31 +5,26 @@ var tcgCardSets = document.getElementById('cardSets');
 var pokeContainer = document.querySelector('#pokeResults');
 var pokemon;
 
-
 var pokeBaseUrl = `https://pokeapi.co/api/v2`;
-// name, number, type, 
+// Base URL variable for PokéAPI 
 
 const tcgBaseUrl = `https://api.pokemontcg.io/v2`;
-//cards (*image*), card sets (base, 
+//Base URL variable for Pokémon TCG API
 
 
-function getSet() {
-  var setId = 'swsh1' //placeholder, change to be result of user input
-  fetch('https://api.pokemontcg.io/v2/sets/' + setId).then((response) => response.json())
-    .then((data) => console.log(data));
-}
-getSet();
-
-
+// Function to create api call depending on user input 
 function fetchPoke(search) {
 
-  if (!search.ok) {
-    errorContentEl.textContent = 'Invalid search. Please try again.';
-    searchBar.value = '';
-    modalEl.classList.add('is-active');
-    return;
-  }
+  //*Bug: Returns "Invalid search" modal even when valid input is searched*
+  
+  // if (!search.ok) {
+  //   errorContentEl.textContent = 'Invalid search. Please try again.';
+  //   searchBar.value = '';
+  //   modalEl.classList.add('is-active');
+  //   return;
+  // }
 
+  //Calls PokéApi and concatenates user inputted pokémon name to 
   fetch(pokeBaseUrl + '/pokemon' + '/' + search)
     .then((search) => search.json())
     .then((data) => {
@@ -42,7 +37,7 @@ function fetchPoke(search) {
     });
 };
 
-
+// Declaring search form variable
 var searchFormEl = document.querySelector('#search-form');
 searchFormEl.addEventListener('submit', handleSearchFormSubmit);
 
@@ -52,6 +47,7 @@ function handleSearchFormSubmit(event) {
 
   var searchInputVal = document.querySelector('#searchBar').value.toLowerCase().trim();
 
+  //Returns error message modal if user does not put anything in search bar
   if (!searchInputVal) {
     errorContentEl.textContent = 'You need a search input value!';
     modalEl.classList.add('is-active');
@@ -119,13 +115,14 @@ function renderPokeResults() {
   pokeContainer.append(card);
 };
 
-
+// Variable declarations to be used in card set image display
 var base1 = document.getElementById('packImageBase1');
 var col1 = document.getElementById('packImageCol1');
 var dv1 = document.getElementById('packImageDv1');
 var neo1 = document.getElementById('packImageNeo1');
 var ex5 = document.getElementById('packImageEx5');
 
+// Functions to get card images based on which set image is clicked
 function fetchSet1() {
   fetch(tcgBaseUrl + '/cards?q=set.id:base1')
     .then((response) => response.json())
@@ -212,38 +209,3 @@ document.addEventListener('keydown', (event) => {
 });
 
 // Submit Button
-
-
-
-
-// https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data#:~:text=How%20To%20Use%20the%20JavaScript%20Fetch%20API%20to,3%20Step%203%20%E2%80%94%20Handling%20POST%20Requests%20
-// be sure to read the comments to fix typos in the main article
-
-// const ul = document.getElementById('authors')
-//     const list = document.createDocumentFragment();
-//     const url = 'https://jsonplaceholder.typicode.com/users/';
-//     fetch(url)
-//     .then((response) => {
-//       return response.json();
-//     })
-//     .then((data) => {
-//       let authors = data;
-//     authors.map(function(author) {
-//       let li = document.createElement('li');
-//       let name = document.createElement('h2');
-//       let email = document.createElement('span');
-
-//       name.innerHTML = `${author.name}`;
-//       email.innerHTML = `${author.email}`;
-// console.log('test');
-//       li.appendChild(name);
-//       li.appendChild(email);
-//       list.appendChild(li);
-//       ul.appendChild(list);
-//       })
-//       })
-//       .catch(function(error) {
-//         console.log(error);
-//     })
-
-//     ul.appendChild(list);

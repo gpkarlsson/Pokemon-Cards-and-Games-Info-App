@@ -21,9 +21,9 @@ getSet();
 
 var pokemon;
 
-function fetchPoke() {
+function fetchPoke(search) {
 
-  fetch(pokeBaseUrl + '/pokemon' + '/charizard')
+  fetch(pokeBaseUrl + '/pokemon' + '/' + search)
     .then((response) => response.json())
     .then ((data) => {
       pokemon = (data);
@@ -31,27 +31,28 @@ function fetchPoke() {
     .then(() => console.log(pokemon))
     .then(() => console.log((pokemon).name))
     .then(function () {
-      renderPokeResultsCard();
+      renderPokeResults();
     });
 }
 
 // Function for results display
-function renderPokeResultsCard () {
+function renderPokeResults () {
   var pokeName = (pokemon).name;
   var pokeImgUrl = (pokemon).sprites.front_default;
   var pokedexNumber = (pokemon).id;
   var pokeHeight = (pokemon).height;
   var pokeWeight = (pokemon).weight;
-  var pokeGen = (pokemon).generation.name;
+  var pokeGen = (pokemon).generation;
+  //let {urlName} = pokeName;
   
-  var card = document.pokeResults.createElement('div');
-  var cardBody = document.pokeResults.createElement('div');
-  var nameHeading = document.pokeResults.createElement('h2');
-  var numberHeading = document.pokeResults.createElement('h3');
-  var pokeImg = document.pokeResults.createElement('img');
-  var heightEl = document.pokeResults.createElement('p');
-  var weightEl = document.pokeResults.createElement('p');
-  var genEl = document.pokeResults.createElement('p');
+  var card = document.createElement('div');
+  var cardBody = document.createElement('div');
+  var nameHeading = document.createElement('h2');
+  var numberHeading = document.createElement('h3');
+  var pokeImg = document.createElement('img');
+  var heightEl = document.createElement('p');
+  var weightEl = document.createElement('p');
+  var genEl = document.createElement('p');
   
   card.setAttribute('class', 'box');
   cardBody.setAttribute('class', 'box');
@@ -65,7 +66,7 @@ function renderPokeResultsCard () {
   
   nameHeading.textContent = (pokeName);
   numberHeading.textContent = (pokedexNumber);
-  pokeImg.setAttribute('src', );
+  pokeImg.setAttribute('src', (pokeImgUrl));
   pokeImg.setAttribute('alt', 'Front default sprite');
   //pokeImg.setAttribute('class',);
   heightEl.textContent = 'Height: ' + (pokeHeight);
@@ -78,7 +79,7 @@ function renderPokeResultsCard () {
   cardBody.append(weightEl);
   cardBody.append(genEl);
   
-  //pokeContainer.innerHTML = '';
+  //pokeContainer.innerHTML = 'This is a result box containing the information on the pokemon you searched: ' + ${urlName};
   pokeContainer.append(card);
   }
   

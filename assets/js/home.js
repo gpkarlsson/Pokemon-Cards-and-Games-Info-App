@@ -20,6 +20,7 @@ getSet();
 
 
 var pokemon;
+var search;
 
 function fetchPoke(search) {
 
@@ -35,8 +36,33 @@ function fetchPoke(search) {
     });
 }
 
+var searchFormEl = document.querySelector('#search-form');
+searchFormEl.addEventListener('submit', handleSearchFormSubmit);
+
+function handleSearchFormSubmit(event) {
+  event.preventDefault();
+
+  var searchInputVal = document.querySelector('#searchBar').value;
+
+  if (!searchInputVal) {
+    console.error('You need a search input value!');
+    return;
+  }
+
+  var search = searchInputVal;
+
+  fetchPoke(search);
+}
+
+
 // Function for results display
 function renderPokeResults () {
+  // Removes past results
+  const pastResults = document.getElementById('card');
+  if (pastResults != null) {
+    pastResults.remove();
+  };
+
   var pokeName = (pokemon).name;
   var pokeImgUrl = (pokemon).sprites.front_default;
   var pokedexNumber = (pokemon).id;
@@ -55,6 +81,7 @@ function renderPokeResults () {
   var genEl = document.createElement('p');
   
   card.setAttribute('class', 'box');
+  card.setAttribute('id', 'card');
   cardBody.setAttribute('class', 'box');
   card.append(cardBody);
   
@@ -84,7 +111,6 @@ function renderPokeResults () {
   }
   
 
-fetchPoke();
 
 
 // EXAMPLE OF GETTING DATA FROM API USING FETCH AND DISPLAYING TO PAGE - FOLLOW LINK FOR STEPS
@@ -115,6 +141,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   
   });
+
+// Submit Button
+
+
+
+
+
 // https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data#:~:text=How%20To%20Use%20the%20JavaScript%20Fetch%20API%20to,3%20Step%203%20%E2%80%94%20Handling%20POST%20Requests%20
 // be sure to read the comments to fix typos in the main article
 

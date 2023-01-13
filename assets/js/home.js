@@ -1,6 +1,9 @@
 var searchBar = document.getElementById('searchBar');
+var modalEl = document.querySelector('#error');
+var errorContentEl = document.querySelector('#errorContent');
 var tcgCardSets = document.getElementById('cardSets');
 var pokeContainer = document.querySelector('#pokeResults');
+var pokemon;
 
 
 var pokeBaseUrl = `https://pokeapi.co/api/v2`;
@@ -17,13 +20,18 @@ function getSet() {
 }
 getSet();
 
-var pokemon;
-var search;
 
 function fetchPoke(search) {
 
+  if (!search.ok) {
+    errorContentEl.textContent = 'Invalid search. Please try again.';
+    searchBar.value = '';
+    modalEl.classList.add('is-active');
+    return;
+  }
+
   fetch(pokeBaseUrl + '/pokemon' + '/' + search)
-    .then((response) => response.json())
+    .then((search) => search.json())
     .then((data) => {
       pokemon = (data);
     })
@@ -32,25 +40,28 @@ function fetchPoke(search) {
     .then(function () {
       renderPokeResults();
     });
-}
+};
+
 
 var searchFormEl = document.querySelector('#search-form');
 searchFormEl.addEventListener('submit', handleSearchFormSubmit);
 
+// Search Bar Submit
 function handleSearchFormSubmit(event) {
   event.preventDefault();
 
-  var searchInputVal = document.querySelector('#searchBar').value;
+  var searchInputVal = document.querySelector('#searchBar').value.toLowerCase().trim();
 
   if (!searchInputVal) {
-    console.error('You need a search input value!');
+    errorContentEl.textContent = 'You need a search input value!';
+    modalEl.classList.add('is-active');
     return;
   }
 
   var search = searchInputVal;
 
   fetchPoke(search);
-}
+};
 
 
 // Function for results display
@@ -106,7 +117,8 @@ function renderPokeResults() {
 
   //pokeContainer.innerHTML = 'This is a result box containing the information on the pokemon you searched: ' + ${urlName};
   pokeContainer.append(card);
-}
+};
+
 
 var base1 = document.getElementById('packImageBase1');
 var col1 = document.getElementById('packImageCol1');
@@ -165,28 +177,73 @@ function fetchSet5() {
 fetchSet4();
 
 //do for each card image
-base1.addEventListener('click', function() {
+base1.addEventListener('click', function () {
   fetchSet1();
   //append data to page innerHTML so on so forth
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+function closeModal($el) {
+  $el.classList.remove('is-active');
+  errorContentEl.textContent = '';
+}
 
-  // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+function closeAllModals() {
+  (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+    closeModal($modal);
+  });
+}
 
-  // Add a click event on each of them
-  $navbarBurgers.forEach(el => {
-    el.addEventListener('click', () => {
+// Add a click event on various child elements to close the parent modal
+(document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+  const $target = $close.closest('.modal');
 
-      // Get the target from the "data-target" attribute
-      const target = el.dataset.target;
-      const $target = document.getElementById(target);
-
-      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-      el.classList.toggle('is-active');
-      $target.classList.toggle('is-active');
-
-    });
+  $close.addEventListener('click', () => {
+    closeModal($target);
   });
 });
+
+// Add a keyboard event to close all modals
+document.addEventListener('keydown', (event) => {
+  const e = event || window.event;
+
+  if (e.keyCode === 27) { // Escape key
+    closeAllModals();
+  }
+});
+
+// Submit Button
+
+
+
+
+// https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data#:~:text=How%20To%20Use%20the%20JavaScript%20Fetch%20API%20to,3%20Step%203%20%E2%80%94%20Handling%20POST%20Requests%20
+// be sure to read the comments to fix typos in the main article
+
+// const ul = document.getElementById('authors')
+//     const list = document.createDocumentFragment();
+//     const url = 'https://jsonplaceholder.typicode.com/users/';
+//     fetch(url)
+//     .then((response) => {
+//       return response.json();
+//     })
+//     .then((data) => {
+//       let authors = data;
+//     authors.map(function(author) {
+//       let li = document.createElement('li');
+//       let name = document.createElement('h2');
+//       let email = document.createElement('span');
+
+//       name.innerHTML = `${author.name}`;
+//       email.innerHTML = `${author.email}`;
+// console.log('test');
+//       li.appendChild(name);
+//       li.appendChild(email);
+//       list.appendChild(li);
+//       ul.appendChild(list);
+//       })
+//       })
+//       .catch(function(error) {
+//         console.log(error);
+//     })
+
+//     ul.appendChild(list);

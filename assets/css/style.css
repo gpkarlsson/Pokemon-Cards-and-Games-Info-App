@@ -24,3 +24,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
+#clear {
+  position: relative;
+}

@@ -16,7 +16,7 @@ const tcgBaseUrl = `https://api.pokemontcg.io/v2`;
 function fetchPoke(search) {
 
   //*Bug: Returns "Invalid search" modal even when valid input is searched*
-  
+
   // if (!search.ok) {
   //   errorContentEl.textContent = 'Invalid search. Please try again.';
   //   searchBar.value = '';
@@ -68,6 +68,7 @@ function renderPokeResults() {
     pastResults.remove();
   };
 
+  //Create variables for API data
   var pokeName = (pokemon).name;
   var pokeImgUrl = (pokemon).sprites.front_default;
   var pokedexNumber = (pokemon).id;
@@ -76,6 +77,7 @@ function renderPokeResults() {
   var pokeGen = (pokemon).generation;
   //let {urlName} = pokeName;
 
+  //Create elements to display API call data
   var card = document.createElement('div');
   var cardBody = document.createElement('div');
   var nameHeading = document.createElement('h2');
@@ -122,62 +124,109 @@ var dv1 = document.getElementById('packImageDv1');
 var neo1 = document.getElementById('packImageNeo1');
 var ex5 = document.getElementById('packImageEx5');
 
-// Functions to get card images based on which set image is clicked
+
+
+//Functions to get card images based on which set image is clicked
 function fetchSet1() {
-  fetch(tcgBaseUrl + '/cards?q=set.id:base1')
-    .then((response) => response.json())
-    .then((data) => {
-      cardImgUrl = (data);
-    })
-    .then(() => console.log(cardImgUrl))
-};
-fetchSet1();
-
-function fetchSet2() {
-  fetch(tcgBaseUrl + '/cards?q=set.id:neo1')
-    .then((response) => response.json())
-    .then((data) => {
-      cardImgUrl = (data);
-    })
-    .then(() => console.log(cardImgUrl))
-};
-fetchSet2();
-
-function fetchSet3() {
   fetch(tcgBaseUrl + '/cards?q=set.id:ex5')
     .then((response) => response.json())
     .then((data) => {
-      cardImgUrl = (data);
+      cardImgUrl1 = (data)
     })
-    .then(() => console.log(cardImgUrl))
+    .then(() => console.log(cardImgUrl1))
+    .then(() => console.log((cardImgUrl1).id))
 };
-fetchSet3();
+fetchSet1()//.then(console.log(data.images))
 
-function fetchSet4() {
-  fetch(tcgBaseUrl + '/cards?q=set.id:dv1')
-    .then((response) => response.json())
-    .then((data) => {
-      cardImgUrl = (data);
-    })
-    .then(() => console.log(cardImgUrl))
+
+var pokemon1 = document.getElementById('pokemon1');
+
+
+//Event listeners to call their respective image display functions when each respective function is clicked
+base1.addEventListener('click',
+  imgBase1);
+
+col1.addEventListener('click',
+  imgCol1);
+
+dv1.addEventListener('click',
+  imgDv1);
+
+neo1.addEventListener('click',
+  imgNeo1);
+
+ex5.addEventListener('click',
+  imgEx5);
+
+
+//Functions that display card images by iteratively creating URLs then passing those URLs into iteratively source tags for the created img tags 
+function imgBase1() {
+  for (let i = 1; i < 102; i++) {
+    let image = document.createElement('img')
+    var base1ImgUrl = 'https://images.pokemontcg.io/base1/' + i + '.png';
+    image.setAttribute('src', base1ImgUrl);
+    pokemon1.appendChild(image);
+  }
 };
-fetchSet4();
 
-function fetchSet5() {
-  fetch(tcgBaseUrl + '/cards?q=set.id:col1')
-    .then((response) => response.json())
-    .then((data) => {
-      cardImgUrl = (data);
-    })
-    .then(() => console.log(cardImgUrl))
+function imgCol1() {
+  for (let i = 1; i < 106; i++) {
+    let image = document.createElement('img')
+    var base1ImgUrl = 'https://images.pokemontcg.io/col1/' + i + '.png';
+    image.setAttribute('src', base1ImgUrl);
+    pokemon1.appendChild(image);
+
+  }
 };
-fetchSet4();
 
-//do for each card image
-base1.addEventListener('click', function () {
-  fetchSet1();
-  //append data to page innerHTML so on so forth
-});
+function imgDv1() {
+  for (let i = 1; i <= 21; i++) {
+    let image = document.createElement('img')
+    var base1ImgUrl = 'https://images.pokemontcg.io/dv1/' + i + '.png';
+    image.setAttribute('src', base1ImgUrl);
+    pokemon1.appendChild(image);
+
+  }
+};
+
+function imgNeo1() {
+  for (let i = 1; i < 111; i++) {
+    let image = document.createElement('img')
+    var base1ImgUrl = 'https://images.pokemontcg.io/neo1/' + i + '.png';
+    image.setAttribute('src', base1ImgUrl);
+    pokemon1.appendChild(image);
+
+  }
+};
+
+function imgEx5() {
+  for (let i = 1; i < 102; i++) {
+    let image = document.createElement('img')
+    var base1ImgUrl = 'https://images.pokemontcg.io/ex5/' + i + '.png';
+    image.setAttribute('src', base1ImgUrl);
+    pokemon1.appendChild(image);
+
+  }
+};
+
+//TODO:ADD FUNCTION TO CLEAR CARDS
+
+// function fetchSet2() {
+//   fetch(tcgBaseUrl + '/cards?q=set.id:neo1')
+//     .then((response) => response.json())
+//     .then((data) => {
+//       cardImgUrl2 = (data)
+//     })
+//     .then(() => console.log(cardImgUrl))
+// };
+
+
+var clearBtn = document.getElementById('clear');
+
+//On click, sets Clear button to an empty string to clear card images off of the page 
+clearBtn.addEventListener('click', function () {
+  pokemon1.innerHTML = '';
+})
 
 function closeModal($el) {
   $el.classList.remove('is-active');

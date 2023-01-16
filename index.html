@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +8,7 @@
   <title>Pokemon Wiki Home Page</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -24,6 +25,8 @@
       <button type="submit" class="btn">Click Me</button>
     </form>
 
+    <div id="cardDisplayText">Click on Booster Packs below to display the cards in each set!</div>
+    
     <div id="error" class="modal">
       <div class="modal-background"></div>
       <div class="modal-content">
@@ -57,10 +60,11 @@
           class="column image"></a>
     </section>
   </main>
-<!-- TODO: Alt text for each image -->
+  <!-- TODO: Alt text for each image -->
   <div id="cleardiv"><button id="clear">Clear</button></div>
   <div id="pokemon1"></div>
 
+  <div id="div"></div>
   <script src="./assets/js/home.js"></script>
 </body>
 

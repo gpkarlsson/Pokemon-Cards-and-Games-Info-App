@@ -136,7 +136,7 @@ function fetchSet1() {
     .then(() => console.log(cardImgUrl1))
     .then(() => console.log((cardImgUrl1).id))
 };
-fetchSet1()//.then(console.log(data.images))
+fetchSet1();
 
 
 var pokemon1 = document.getElementById('pokemon1');
@@ -258,3 +258,35 @@ document.addEventListener('keydown', (event) => {
 });
 
 // Submit Button
+
+var div = document.getElementById('div');
+fetch(tcgBaseUrl + '/cards?q=set.id:base1').then((response) => {
+  return response.json();
+})
+  .then((data) => {
+    console.log(typeof data)
+    div.textContent = JSON.stringify(data.data[1].name)
+    
+    console.log(typeof data)
+  }); 
+  
+  // var pokemonArray = data.data;
+  
+  // pokemonArray.forEach(displayOnScreen);
+  
+  // function displayOnScreen() {
+  //   for (i = 0; i < 102; i++) {
+  //     div.textContent = JSON.stringify(data.data[i].name)
+  //   }
+  // }
+
+ 
+//  $(document).ready(function(){
+//   $.ajax({
+//     url: 'https://api.pokemontcg.io/v2/cards?q=set.id:base1',
+//     type: 'GET',
+//     success:function(data){
+//       console.log(data.data);
+//     }
+//   })
+// })

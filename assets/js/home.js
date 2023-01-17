@@ -144,19 +144,19 @@ var pokemon1 = document.getElementById('pokemon1');
 
 //Event listeners to call their respective image display functions when each respective function is clicked
 base1.addEventListener('click',
-  imgBase1);
+  imgBase1, getReleaseDate1());
 
 col1.addEventListener('click',
-  imgCol1);
+  imgCol1, getReleaseDate2());
 
 dv1.addEventListener('click',
-  imgDv1);
+  imgDv1, getReleaseDate3());
 
 neo1.addEventListener('click',
-  imgNeo1);
+  imgNeo1, getReleaseDate4());
 
 ex5.addEventListener('click',
-  imgEx5);
+  imgEx5, getReleaseDate5());
 
 
 //Functions that display card images by iteratively creating URLs then passing those URLs into iteratively source tags for the created img tags 
@@ -175,7 +175,6 @@ function imgCol1() {
     var base1ImgUrl = 'https://images.pokemontcg.io/col1/' + i + '.png';
     image.setAttribute('src', base1ImgUrl);
     pokemon1.appendChild(image);
-
   }
 };
 
@@ -185,7 +184,6 @@ function imgDv1() {
     var base1ImgUrl = 'https://images.pokemontcg.io/dv1/' + i + '.png';
     image.setAttribute('src', base1ImgUrl);
     pokemon1.appendChild(image);
-
   }
 };
 
@@ -195,7 +193,6 @@ function imgNeo1() {
     var base1ImgUrl = 'https://images.pokemontcg.io/neo1/' + i + '.png';
     image.setAttribute('src', base1ImgUrl);
     pokemon1.appendChild(image);
-
   }
 };
 
@@ -205,7 +202,6 @@ function imgEx5() {
     var base1ImgUrl = 'https://images.pokemontcg.io/ex5/' + i + '.png';
     image.setAttribute('src', base1ImgUrl);
     pokemon1.appendChild(image);
-
   }
 };
 
@@ -257,18 +253,58 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-// Submit Button
+// Display set release dates above each booster pack after clicking on the booster pack
+function getReleaseDate1() {
+  var base1 = document.getElementById('base1');
+  fetch(tcgBaseUrl + '/cards?q=set.id:base1').then((response) => {
+    return response.json();
+  })
+    .then((data) => {
+      base1.textContent = 'Base1: ' + JSON.stringify(data.data[0].set.releaseDate)  
+    }); 
+}
 
-var div = document.getElementById('div');
-fetch(tcgBaseUrl + '/cards?q=set.id:base1').then((response) => {
-  return response.json();
-})
-  .then((data) => {
-    console.log(typeof data)
-    div.textContent = JSON.stringify(data.data[1].name)
-    
-    console.log(typeof data)
-  }); 
+function getReleaseDate2() {
+  var col1 = document.getElementById('col1');
+  fetch(tcgBaseUrl + '/cards?q=set.id:col1').then((response) => {
+    return response.json();
+  })
+    .then((data) => {
+      col1.textContent = 'Call of Legends: ' + JSON.stringify(data.data[0].set.releaseDate)
+    }); 
+}
+
+function getReleaseDate3() {
+  var dv1 = document.getElementById('dv1');
+  fetch(tcgBaseUrl + '/cards?q=set.id:dv1').then((response) => {
+    return response.json();
+  })
+    .then((data) => {
+      dv1.textContent = 'Dragon Vault: ' + JSON.stringify(data.data[0].set.releaseDate)
+    }); 
+}
+
+function getReleaseDate4() {
+  var ex5 = document.getElementById('ex5');
+  fetch(tcgBaseUrl + '/cards?q=set.id:ex5').then((response) => {
+    return response.json();
+  })
+    .then((data) => {
+      ex5.textContent = 'Hidden Legends: ' + JSON.stringify(data.data[0].set.releaseDate)   
+    }); 
+}
+
+function getReleaseDate5() {
+  var neo1 = document.getElementById('neo1');
+  fetch(tcgBaseUrl + '/cards?q=set.id:neo1').then((response) => {
+    return response.json();
+  })
+    .then((data) => {
+      neo1.textContent = 'Neo Genesis: ' + JSON.stringify(data.data[0].set.releaseDate)
+    }); 
+}
+
+//getReleaseDate();
   
   // var pokemonArray = data.data;
   

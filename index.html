@@ -19,10 +19,17 @@
   </header>
 
   <main>
-    <!-- Search Bar -->
-    <form id="search-form">
-      <input id="searchBar" class="input is-normal" type="text" placeholder="Search for Pokemon Here!">
-      <button type="submit" class="btn">Click Me</button>
+    <form id="search-form" class="columns">
+      <!-- Search History Dropdown -->
+      <div class="select">
+        <select id="searchHistory" class="column">
+          <option name hidden>Search History</option>
+        </select>
+      </div>
+
+      <!-- Search Bar -->
+      <input id="searchBar" class="input is-normal column is-half" type="text" placeholder="Search for Pokemon Here!">
+      <button type="submit" class="button column is-1">Submit</button>
     </form>
 
     <div id="cardDisplayText" style="display: flex; justify-content: center;">Click on Booster Packs below to display

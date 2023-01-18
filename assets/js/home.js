@@ -1,4 +1,6 @@
-var searchBar = document.querySelector('#searchBar');
+var searchBar = document.getElementById('searchBar');
+var searchHistorySelect = document.querySelector('#searchHistory');
+
 var modalEl = document.querySelector('#error');
 var errorContentEl = document.querySelector('#errorContent');
 var tcgCardSets = document.getElementById('cardSets');
@@ -34,6 +36,7 @@ function fetchPoke(search) {
     .then(() => console.log((pokemon).name))
     .then(function () {
       renderPokeResults();
+      appendToHistory(search);
     });
 };
 
@@ -45,7 +48,7 @@ searchFormEl.addEventListener('submit', handleSearchFormSubmit);
 function handleSearchFormSubmit(event) {
   event.preventDefault();
 
-  var searchInputVal = document.querySelector('#searchBar').value.toLowerCase().trim();
+  var searchInputVal = searchBar.value.toLowerCase().trim();
 
   //Returns error message modal if user does not put anything in search bar
   if (!searchInputVal) {
@@ -116,6 +119,53 @@ function renderPokeResults() {
   //pokeContainer.innerHTML = 'This is a result box containing the information on the pokemon you searched: ' + ${urlName};
   pokeContainer.append(card);
 };
+
+//Append Search History from Local Storage
+var searchHistory = [];
+
+// Function to display the search history list.
+function renderSearchHistory() {
+  searchHistorySelect.innerHTML = '';
+
+  var selectName = document.createElement('option');
+  selectName.setAttribute('name', '');
+  selectName.setAttribute('hidden', '');
+  selectName.textContent = "Search History";
+  searchHistorySelect.append(selectName);
+
+  // Start at end of history array and count down to show the most recent at the top.
+  for (let i = 0; i < searchHistory.length; i++) {
+    var optn = document.createElement('option');
+
+    // data-search allows access to city name when click handler is invoked
+    // optn.setAttribute('data-search', searchHistory[i]);
+    optn.textContent = searchHistory[i];
+    searchHistorySelect.append(optn);
+  }
+}
+
+// Function to update history in local storage then updates displayed history.
+function appendToHistory(search) {
+  // If there is no search term return the function
+  //  if (searchHistory.indexOf(search) !== -1) {
+  //    return;
+  //  }
+  searchHistory.push(search);
+
+  localStorage.setItem('search-history', JSON.stringify(searchHistory));
+  renderSearchHistory();
+}
+
+// Function to get search history from local storage
+function initSearchHistory() {
+  var localHistory = localStorage.getItem('search-history');
+  if (localHistory) {
+    searchHistory = JSON.parse(localHistory);
+  }
+  renderSearchHistory();
+}
+
+
 
 // Variable declarations to be used in card set image display
 var base1 = document.getElementById('packImageBase1');
@@ -226,6 +276,11 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+// Dropdown Menu
+
+
+
+
 // Display set release dates above each booster pack after clicking on the booster pack
 function getReleaseDate1() {
   var base1 = document.getElementById('base1');
@@ -270,4 +325,4 @@ function getReleaseDate5() {
   })
     .then((data) => {
       neo1.textContent = 'Neo Genesis: ' + JSON.stringify(data.data[0].set.releaseDate)
-    })};
+

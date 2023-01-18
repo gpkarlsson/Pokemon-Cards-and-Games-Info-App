@@ -32,12 +32,13 @@
       <button type="submit" class="button column is-1">Submit</button>
     </form>
 
-    <div id="cardDisplayText">Click on Booster Packs below to display the cards in each set!</div>
+    <div id="cardDisplayText" style="display: flex; justify-content: center;">Click on Booster Packs below to display
+      the cards in each set!</div>
 
     <div id="error" class="modal">
       <div class="modal-background"></div>
       <div class="modal-content">
-        <div class="box">
+        <div id="pokeApiBox" class="box">
           <p id="errorContent"></p>
         </div>
       </div>
@@ -48,34 +49,41 @@
       <section id="cardResults"></section>
       <section id="pokeResults"></section>
     </div>
-
+    <!-- Images for Card Sets -->
     <section id="cardSets" class="columns">
-      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/base1/logo.png" alt=""
-          class="column image"><img src="./assets/images/baseSet.png" alt="" class="packImage" id="packImageBase1"
-          class="column image"></a>
+      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/base1/logo.png"
+          alt="Image displaying the logo from the Pokemon card set Base 1" class="column image"><img
+          src="./assets/images/baseSet.png" alt="Image of a booster pack of the original Base 1 set of pokemon cards"
+          class="packImage" id="packImageBase1" class="column image"></a>
 
-      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/col1/logo.png" alt=""
-          class="column image"><img src="./assets/images/callOfLegends.png" alt="" class="packImage" id="packImageCol1"
-          class="column image"></a>
-      
-      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/dv1/logo.png" alt=""
-          class="column image"><img src="./assets/images/dragonVault.png" alt="" class="packImage" id="packImageDv1"
-          class="column image"></a>
-      
-      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/ex5/logo.png" alt=""
-          class="column image"><img src="./assets/images/exHiddenLegends.png" alt="" class="packImage" id="packImageEx5"
-          class="column image"></a>
-      
+      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/col1/logo.png"
+          alt="Image displaying the logo of the Call of Legends Pokemon card set" class="column image"><img
+          src="./assets/images/callOfLegends.png"
+          alt="Image of the front of a booster pack from the Call of Legends set of pokemon cards" class="packImage"
+          id="packImageCol1" class="column image"></a>
 
-      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/neo1/logo.png" alt=""
-          class="column image"><img src="./assets/images/neoGenesis.png" alt="" class="packImage" id="packImageNeo1"
-          class="column image"></a>
-      
+      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/dv1/logo.png"
+          alt="Image displaying the logo of the Dragon Vault Pokemon card set" class="column image"><img
+          src="./assets/images/dragonVault.png"
+          alt="Image of the front of a booster pack from the Dragon Vault set of pokemon cards" class="packImage"
+          id="packImageDv1" class="column image"></a>
+
+      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/ex5/logo.png"
+          alt="Image displaying the logo of the Ex Hidden Legends Pokemon card set" class="column image"><img
+          src="./assets/images/exHiddenLegends.png"
+          alt="Image of the front of a booster pack from the Ex Hidden Legends set of pokemon cards" class="packImage"
+          id="packImageEx5" class="column image"></a>
+
+      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/neo1/logo.png"
+          alt="Image displaying the logo of the Neo Genesis Pokemon card set" class="column image"><img
+          src="./assets/images/neoGenesis.png"
+          alt="Image of the front of a booster pack from the Neo Genesis set of pokemon cards" class="packImage"
+          id="packImageNeo1" class="column image"></a>
 
     </section>
   </main>
-  <!-- TODO: Alt text for each image -->
-  <div id="">
+
+  <div id="cardsEtc">
     <div id="cleardiv"><button id="clear">Clear</button></div>
     <div id="pokemon1"></div>
     <div id="base1"></div>
@@ -84,7 +92,6 @@
     <div id="ex5"></div>
     <div id="neo1"></div>
   </div>
-
 
   <div id="div"></div>
   <script src="./assets/js/home.js"></script>

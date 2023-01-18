@@ -325,4 +325,5 @@ function getReleaseDate5() {
   })
     .then((data) => {
       neo1.textContent = 'Neo Genesis: ' + JSON.stringify(data.data[0].set.releaseDate)
-
+})};
+initSearchHistory();

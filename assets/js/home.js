@@ -17,18 +17,16 @@ const tcgBaseUrl = `https://api.pokemontcg.io/v2`;
 // Function to create api call depending on user input 
 function fetchPoke(search) {
 
-  //*Bug: Returns "Invalid search" modal even when valid input is searched*
-
-  // if (!search.ok) {
-  //   errorContentEl.textContent = 'Invalid search. Please try again.';
-  //   searchBar.value = '';
-  //   modalEl.classList.add('is-active');
-  //   return;
-  // }
-
   //Calls PokéApi and concatenates user inputted pokémon name to 
   fetch(pokeBaseUrl + '/pokemon' + '/' + search)
     .then((search) => search.json())
+    //Error Handling
+    .catch(function () {
+      errorContentEl.textContent = 'Invalid search. Please try again.';
+      searchBar.value = '';
+      modalEl.classList.add('is-active');
+      return;
+    })
     .then((data) => {
       pokemon = (data);
     })
@@ -78,7 +76,7 @@ function renderPokeResults() {
   var pokeHeight1 = (pokemon).height.toString();
   var pokeWeight1 = (pokemon).weight.toString();
   var pokeGen = (pokemon).generation;
-  
+
   //Add proper decimal places
   var pokeHeight = [pokeHeight1.slice(0, -1), '.', pokeHeight1.slice(-1)].join('');
   var pokeWeight = [pokeWeight1.slice(0, -1), '.', pokeWeight1.slice(-1)].join('');
@@ -97,12 +95,6 @@ function renderPokeResults() {
   card.setAttribute('id', 'card');
   card2.setAttribute('class', 'box');
   card2.setAttribute('id', 'card');
-  
-  //nameHeading.setAttribute();
-  //numberHeading.setAttribute();
-  //heightEl.setAttribute();
-  //weightEl.setAttribute();
-  //genEl.setAttribute();
 
   nameHeading.textContent = 'Name: ' + (pokeName);
   numberHeading.textContent = 'Pokedex Number: #' + (pokedexNumber);
@@ -112,6 +104,7 @@ function renderPokeResults() {
   heightEl.textContent = 'Height: ' + (pokeHeight) + ' m';
   weightEl.textContent = 'Weight: ' + (pokeWeight) + ' kg';
   genEl.textContent = (pokeGen);
+
   card.append(pokeImg);
   card.append(card2);
   card2.append(nameHeading);
@@ -123,6 +116,7 @@ function renderPokeResults() {
   //pokeContainer.innerHTML = 'This is a result box containing the information on the pokemon you searched: ' + ${urlName};
   pokeContainer.append(card);
 };
+
 
 //Append Search History from Local Storage
 var searchHistory = [];
@@ -140,9 +134,6 @@ function renderSearchHistory() {
   // Start at end of history array and count down to show the most recent at the top.
   for (let i = 0; i < searchHistory.length; i++) {
     var optn = document.createElement('option');
-
-    // data-search allows access to city name when click handler is invoked
-    // optn.setAttribute('data-search', searchHistory[i]);
     optn.textContent = searchHistory[i];
     searchHistorySelect.append(optn);
   }
@@ -165,6 +156,7 @@ function initSearchHistory() {
   renderSearchHistory();
 }
 
+initSearchHistory();
 
 
 // Variable declarations to be used in card set image display
@@ -176,73 +168,56 @@ var ex5 = document.getElementById('packImageEx5');
 
 var pokemon1 = document.getElementById('pokemon1');
 
+
+//Function that displays card images by iteratively creating URLs then passing those URLs into iteratively source tags for the created img tags 
+function cardImg(x, y) {
+  pokemon1.innerHTML = '';
+  for (let i = 1; i < x; i++) {
+    let image = document.createElement('img')
+    var imgUrl = 'https://images.pokemontcg.io/' + y + '/' + i + '.png';
+    image.setAttribute('src', imgUrl);
+    pokemon1.appendChild(image);
+  }
+};
+
+// Display set release dates above each booster pack after clicking on the booster pack
+function getReleaseDate(x, y) {
+  var releaseEl = document.getElementById(x);
+  fetch(tcgBaseUrl + '/cards?q=set.id:' + x).then((response) => {
+    return response.json();
+  })
+    .then((data) => {
+      releaseEl.textContent = y + JSON.stringify(data.data[0].set.releaseDate)
+    })
+}
+
 //Event listeners to call their respective image display functions when each respective function is clicked
-base1.addEventListener('click',
-  imgBase1, getReleaseDate1());
+base1.addEventListener('click', function() {
+  cardImg('102', 'base1');
+  getReleaseDate('base1', 'Base1: ');
+});
 
-col1.addEventListener('click',
-  imgCol1, getReleaseDate2());
+col1.addEventListener('click', function() {
+  cardImg('96', 'col1');
+  getReleaseDate('col1', 'Call of Legends: ');
+});
 
-dv1.addEventListener('click',
-  imgDv1, getReleaseDate3());
+dv1.addEventListener('click', function() {
+  cardImg('22', 'dv1');
+  getReleaseDate('dv1', 'Dragon Vault: ');
+});
 
-neo1.addEventListener('click',
-  imgNeo1, getReleaseDate4());
+neo1.addEventListener('click', function() {
+  cardImg('111', 'neo1');
+  getReleaseDate('neo1', 'Hidden Legends: ');
+});
 
-ex5.addEventListener('click',
-  imgEx5, getReleaseDate5());
+ex5.addEventListener('click', function() {
+  cardImg('102', 'ex5');
+  getReleaseDate('ex5', 'Neo Genesis: ');
+});
 
-//Functions that display card images by iteratively creating URLs then passing those URLs into iteratively source tags for the created img tags 
-function imgBase1() {
-  pokemon1.innerHTML = '';
-  for (let i = 1; i < 102; i++) {
-    let image = document.createElement('img')
-    var base1ImgUrl = 'https://images.pokemontcg.io/base1/' + i + '.png';
-    image.setAttribute('src', base1ImgUrl);
-    pokemon1.appendChild(image);
-  }
-};
-
-function imgCol1() {
-  pokemon1.innerHTML = '';
-  for (let i = 1; i < 106; i++) {
-    let image = document.createElement('img')
-    var imgUrl = 'https://images.pokemontcg.io/col1/' + i + '.png';
-    image.setAttribute('src', imgUrl);
-    pokemon1.appendChild(image);
-  }
-};
-
-function imgDv1() {
-  pokemon1.innerHTML = '';
-  for (let i = 1; i <= 21; i++) {
-    let image = document.createElement('img')
-    var imgUrl = 'https://images.pokemontcg.io/dv1/' + i + '.png';
-    image.setAttribute('src', imgUrl);
-    pokemon1.appendChild(image);
-  }
-};
-
-function imgNeo1() {
-  pokemon1.innerHTML = '';
-  for (let i = 1; i < 111; i++) {
-    let image = document.createElement('img')
-    var imgUrl = 'https://images.pokemontcg.io/neo1/' + i + '.png';
-    image.setAttribute('src', imgUrl);
-    pokemon1.appendChild(image);
-  }
-};
-
-function imgEx5() {
-  pokemon1.innerHTML = '';
-  for (let i = 1; i < 102; i++) {
-    let image = document.createElement('img')
-    var imgUrl = 'https://images.pokemontcg.io/ex5/' + i + '.png';
-    image.setAttribute('src', imgUrl);
-    pokemon1.appendChild(image);
-  }
-};
-
+//Clears all cards from screen
 var clearBtn = document.getElementById('clear');
 
 //On click, sets Clear button to an empty string to clear card images off of the page 
@@ -276,52 +251,3 @@ document.addEventListener('keydown', (event) => {
     closeAllModals();
   }
 });
-
-
-// Display set release dates above each booster pack after clicking on the booster pack
-function getReleaseDate1() {
-  var base1 = document.getElementById('base1');
-  fetch(tcgBaseUrl + '/cards?q=set.id:base1').then((response) => {
-    return response.json();
-  })
-    .then((data) => {
-      base1.textContent = 'Base1: ' + JSON.stringify(data.data[0].set.releaseDate)
-    })};
-
-function getReleaseDate2() {
-  var col1 = document.getElementById('col1');
-  fetch(tcgBaseUrl + '/cards?q=set.id:col1').then((response) => {
-    return response.json();
-  })
-    .then((data) => {
-      col1.textContent = 'Call of Legends: ' + JSON.stringify(data.data[0].set.releaseDate)
-    })};
-
-function getReleaseDate3() {
-  var dv1 = document.getElementById('dv1');
-  fetch(tcgBaseUrl + '/cards?q=set.id:dv1').then((response) => {
-    return response.json();
-  })
-    .then((data) => {
-      dv1.textContent = 'Dragon Vault: ' + JSON.stringify(data.data[0].set.releaseDate)
-    })};
-
-function getReleaseDate4() {
-  var ex5 = document.getElementById('ex5');
-  fetch(tcgBaseUrl + '/cards?q=set.id:ex5').then((response) => {
-    return response.json();
-  })
-    .then((data) => {
-      ex5.textContent = 'Hidden Legends: ' + JSON.stringify(data.data[0].set.releaseDate)
-    })};
-
-function getReleaseDate5() {
-  var neo1 = document.getElementById('neo1');
-  fetch(tcgBaseUrl + '/cards?q=set.id:neo1').then((response) => {
-    return response.json();
-  })
-    .then((data) => {
-      neo1.textContent = 'Neo Genesis: ' + JSON.stringify(data.data[0].set.releaseDate)
-})};
-
-initSearchHistory();

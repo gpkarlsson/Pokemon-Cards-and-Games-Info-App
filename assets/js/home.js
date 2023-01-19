@@ -72,17 +72,20 @@ function renderPokeResults() {
   };
 
   //Create variables for API data
-  var pokeName = (pokemon).name;
+  var pokeName = (pokemon).name.charAt(0).toUpperCase() + (pokemon).name.slice(1);
   var pokeImgUrl = (pokemon).sprites.front_default;
   var pokedexNumber = (pokemon).id;
-  var pokeHeight = (pokemon).height;
-  var pokeWeight = (pokemon).weight;
+  var pokeHeight1 = (pokemon).height.toString();
+  var pokeWeight1 = (pokemon).weight.toString();
   var pokeGen = (pokemon).generation;
   
+  //Add proper decimal places
+  var pokeHeight = [pokeHeight1.slice(0, -1), '.', pokeHeight1.slice(-1)].join('');
+  var pokeWeight = [pokeWeight1.slice(0, -1), '.', pokeWeight1.slice(-1)].join('');
 
   //Create elements to display API call data
   var card = document.createElement('div');
-  var cardBody = document.createElement('div');
+  var card2 = document.createElement('div');
   var nameHeading = document.createElement('h2');
   var numberHeading = document.createElement('h3');
   var pokeImg = document.createElement('img');
@@ -92,29 +95,30 @@ function renderPokeResults() {
 
   card.setAttribute('class', 'box');
   card.setAttribute('id', 'card');
-  cardBody.setAttribute('class', 'box');
-  card.append(cardBody);
-
+  card2.setAttribute('class', 'box');
+  card2.setAttribute('id', 'card');
+  
   //nameHeading.setAttribute();
   //numberHeading.setAttribute();
   //heightEl.setAttribute();
   //weightEl.setAttribute();
   //genEl.setAttribute();
 
-  nameHeading.textContent = (pokeName);
-  numberHeading.textContent = (pokedexNumber);
+  nameHeading.textContent = 'Name: ' + (pokeName);
+  numberHeading.textContent = 'Pokedex Number: #' + (pokedexNumber);
   pokeImg.setAttribute('src', (pokeImgUrl));
   pokeImg.setAttribute('alt', 'Front default sprite');
-  //pokeImg.setAttribute('class',);
-  heightEl.textContent = 'Height: ' + (pokeHeight);
-  weightEl.textContent = 'Weight: ' + (pokeWeight);
+  pokeImg.setAttribute('class', 'pokeImgClass');
+  heightEl.textContent = 'Height: ' + (pokeHeight) + ' m';
+  weightEl.textContent = 'Weight: ' + (pokeWeight) + ' kg';
   genEl.textContent = (pokeGen);
-  cardBody.append(pokeImg);
-  cardBody.append(nameHeading);
-  cardBody.append(numberHeading);
-  cardBody.append(heightEl);
-  cardBody.append(weightEl);
-  cardBody.append(genEl);
+  card.append(pokeImg);
+  card.append(card2);
+  card2.append(nameHeading);
+  card2.append(numberHeading);
+  card2.append(heightEl);
+  card2.append(weightEl);
+  card2.append(genEl);
 
   //pokeContainer.innerHTML = 'This is a result box containing the information on the pokemon you searched: ' + ${urlName};
   pokeContainer.append(card);
@@ -146,10 +150,6 @@ function renderSearchHistory() {
 
 // Function to update history in local storage then updates displayed history.
 function appendToHistory(search) {
-  // If there is no search term return the function
-  //  if (searchHistory.indexOf(search) !== -1) {
-  //    return;
-  //  }
   searchHistory.push(search);
 
   localStorage.setItem('search-history', JSON.stringify(searchHistory));
@@ -194,6 +194,7 @@ ex5.addEventListener('click',
 
 //Functions that display card images by iteratively creating URLs then passing those URLs into iteratively source tags for the created img tags 
 function imgBase1() {
+  pokemon1.innerHTML = '';
   for (let i = 1; i < 102; i++) {
     let image = document.createElement('img')
     var base1ImgUrl = 'https://images.pokemontcg.io/base1/' + i + '.png';
@@ -203,37 +204,41 @@ function imgBase1() {
 };
 
 function imgCol1() {
+  pokemon1.innerHTML = '';
   for (let i = 1; i < 106; i++) {
     let image = document.createElement('img')
-    var base1ImgUrl = 'https://images.pokemontcg.io/col1/' + i + '.png';
-    image.setAttribute('src', base1ImgUrl);
+    var imgUrl = 'https://images.pokemontcg.io/col1/' + i + '.png';
+    image.setAttribute('src', imgUrl);
     pokemon1.appendChild(image);
   }
 };
 
 function imgDv1() {
+  pokemon1.innerHTML = '';
   for (let i = 1; i <= 21; i++) {
     let image = document.createElement('img')
-    var base1ImgUrl = 'https://images.pokemontcg.io/dv1/' + i + '.png';
-    image.setAttribute('src', base1ImgUrl);
+    var imgUrl = 'https://images.pokemontcg.io/dv1/' + i + '.png';
+    image.setAttribute('src', imgUrl);
     pokemon1.appendChild(image);
   }
 };
 
 function imgNeo1() {
+  pokemon1.innerHTML = '';
   for (let i = 1; i < 111; i++) {
     let image = document.createElement('img')
-    var base1ImgUrl = 'https://images.pokemontcg.io/neo1/' + i + '.png';
-    image.setAttribute('src', base1ImgUrl);
+    var imgUrl = 'https://images.pokemontcg.io/neo1/' + i + '.png';
+    image.setAttribute('src', imgUrl);
     pokemon1.appendChild(image);
   }
 };
 
 function imgEx5() {
+  pokemon1.innerHTML = '';
   for (let i = 1; i < 102; i++) {
     let image = document.createElement('img')
-    var base1ImgUrl = 'https://images.pokemontcg.io/ex5/' + i + '.png';
-    image.setAttribute('src', base1ImgUrl);
+    var imgUrl = 'https://images.pokemontcg.io/ex5/' + i + '.png';
+    image.setAttribute('src', imgUrl);
     pokemon1.appendChild(image);
   }
 };
@@ -250,14 +255,11 @@ function closeModal($el) {
   $el.classList.remove('is-active');
   errorContentEl.textContent = '';
 };
-
-
 function closeAllModals() {
   (document.querySelectorAll('.modal') || []).forEach(($modal) => {
     closeModal($modal);
   });
 };
-
 // Add a click event on various child elements to close the parent modal
 (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
   const $target = $close.closest('.modal');
@@ -266,7 +268,6 @@ function closeAllModals() {
     closeModal($target);
   });
 });
-
 // Add a keyboard event to close all modals
 document.addEventListener('keydown', (event) => {
   const e = event || window.event;
@@ -275,10 +276,6 @@ document.addEventListener('keydown', (event) => {
     closeAllModals();
   }
 });
-
-// Dropdown Menu
-
-
 
 
 // Display set release dates above each booster pack after clicking on the booster pack
@@ -326,4 +323,5 @@ function getReleaseDate5() {
     .then((data) => {
       neo1.textContent = 'Neo Genesis: ' + JSON.stringify(data.data[0].set.releaseDate)
 })};
+
 initSearchHistory();

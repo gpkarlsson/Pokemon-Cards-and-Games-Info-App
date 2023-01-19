@@ -32,9 +32,7 @@
       <button type="submit" class="button column is-1">Submit</button>
     </form>
 
-    <div id="cardDisplayText" style="display: flex; justify-content: center;">Click on Booster Packs below to display
-      the cards in each set!</div>
-
+    <!-- Error Modal -->
     <div id="error" class="modal">
       <div class="modal-background"></div>
       <div class="modal-content">
@@ -45,55 +43,71 @@
       <button class="modal-close is-large" aria-label="close"></button>
     </div>
 
-    <div>
-      <section id="cardResults"></section>
-      <section id="pokeResults"></section>
-    </div>
+    <section id="pokeResults" class="has-text-centered"></section>
+    
+    <p id="cardDisplayText" style="display: flex; justify-content: center; margin: 20px 0 10px 0;">Click on Booster Packs below to display
+      the cards in each set!</p>
+
     <!-- Images for Card Sets -->
     <section id="cardSets" class="columns">
-      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/base1/logo.png"
-          alt="Image displaying the logo from the Pokemon card set Base 1" class="column image"><img
-          src="./assets/images/baseSet.png" alt="Image of a booster pack of the original Base 1 set of pokemon cards"
-          class="packImage" id="packImageBase1" class="column image"></a>
+      <div id="set" class="column"><img src="https://images.pokemontcg.io/base1/logo.png"
+          alt="Image displaying the logo from the Pokemon card set Base 1" class="column image logo"><img
+          src="./assets/images/baseSet.png" 
+          alt="Image of a booster pack of the original Base 1 set of pokemon cards"
+          id="packImageBase1" class="column image packImage">
+        <p id="base1"></p>
+      </div>
 
-      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/col1/logo.png"
-          alt="Image displaying the logo of the Call of Legends Pokemon card set" class="column image"><img
+      <div id="set" class="column"><img src="https://images.pokemontcg.io/col1/logo.png"
+          alt="Image displaying the logo of the Call of Legends Pokemon card set" class="column image logo"><img
           src="./assets/images/callOfLegends.png"
-          alt="Image of the front of a booster pack from the Call of Legends set of pokemon cards" class="packImage"
-          id="packImageCol1" class="column image"></a>
+          alt="Image of the front of a booster pack from the Call of Legends set of pokemon cards"
+          id="packImageCol1" class="column image packImage">
+        <p id="col1"></p>  
+      </div>
 
-      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/dv1/logo.png"
-          alt="Image displaying the logo of the Dragon Vault Pokemon card set" class="column image"><img
+      <div id="set" class="column"><img src="https://images.pokemontcg.io/dv1/logo.png"
+          alt="Image displaying the logo of the Dragon Vault Pokemon card set" class="column image logo"><img
           src="./assets/images/dragonVault.png"
-          alt="Image of the front of a booster pack from the Dragon Vault set of pokemon cards" class="packImage"
-          id="packImageDv1" class="column image"></a>
+          alt="Image of the front of a booster pack from the Dragon Vault set of pokemon cards"
+          id="packImageDv1" class="column image packImage">
+        <p id="dv1"></p>  
+      </div>
 
-      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/ex5/logo.png"
-          alt="Image displaying the logo of the Ex Hidden Legends Pokemon card set" class="column image"><img
+      <div id="set" class="column"><img src="https://images.pokemontcg.io/ex5/logo.png"
+          alt="Image displaying the logo of the Ex Hidden Legends Pokemon card set" class="column image logo"><img
           src="./assets/images/exHiddenLegends.png"
-          alt="Image of the front of a booster pack from the Ex Hidden Legends set of pokemon cards" class="packImage"
-          id="packImageEx5" class="column image"></a>
+          alt="Image of the front of a booster pack from the Ex Hidden Legends set of pokemon cards"
+          id="packImageEx5" class="column image packImage">
+        <p id="ex5"></p>  
+      </div>
 
-      <a href="#" id="set" class="column"><img src="https://images.pokemontcg.io/neo1/logo.png"
-          alt="Image displaying the logo of the Neo Genesis Pokemon card set" class="column image"><img
+      <div id="set" class="column"><img src="https://images.pokemontcg.io/neo1/logo.png"
+          alt="Image displaying the logo of the Neo Genesis Pokemon card set" class="column image logo"><img
           src="./assets/images/neoGenesis.png"
-          alt="Image of the front of a booster pack from the Neo Genesis set of pokemon cards" class="packImage"
-          id="packImageNeo1" class="column image"></a>
+          alt="Image of the front of a booster pack from the Neo Genesis set of pokemon cards"
+          id="packImageNeo1" class="column image packImage">
+        <p id="neo1"></p>  
+      </div>
 
     </section>
+
+    <div class="has-text-centered"><button id="clear" class="button">Clear All Cards</button></div>
+    <div id="pokemon1" class="has-text-centered"></div>
+
   </main>
 
-  <div id="cardsEtc">
-    <div id="cleardiv"><button id="clear">Clear</button></div>
-    <div id="pokemon1"></div>
-    <div id="base1"></div>
-    <div id="col1"></div>
-    <div id="dv1"></div>
-    <div id="ex5"></div>
-    <div id="neo1"></div>
-  </div>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Pokemon Cards and Cartriges</strong> by Jullian Calkins, Gordon Karlsson, and Devin Hoffmaster. This
+        website utilizes <a href="https://pokeapi.co/">PokéApi</a> and <a href="https://docs.pokemontcg.io/">Pokémon TCG
+          Api</a>. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. Pokémon and Pokémon character names are trademarks of Nintendo.
+      </p>
+    </div>
+  </footer>
 
-  <div id="div"></div>
   <script src="./assets/js/home.js"></script>
 </body>
 

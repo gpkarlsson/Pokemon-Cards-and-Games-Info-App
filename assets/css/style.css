@@ -5,25 +5,45 @@
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 10px;
   line-height: 1.5;
   font-size: 16px;
-}
-
-.set {
-    width: 300px;
-}
-
-.packImage {
-    height: 430px;
 }
 
 #h1 {
   position: relative;
   display: flex;
   justify-content: center;
+  margin: 20px 0px 20px 0px;
 }
 
-#clear {
-  position: relative;
+#search-form {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0px 50px 0px;
+}
+
+.box {
+  display: inline-block;
+}
+
+.pokeImgClass {
+  width: 150%;
+}
+
+#set {
+  width: 300px;
+  margin: auto;
+}
+
+.logo {
+  width: 240px;
+}
+
+.packImage {
+  height: 430px;
+}
+
+#pokemon1 {
+  margin: 10px 0 0 10px;
 }

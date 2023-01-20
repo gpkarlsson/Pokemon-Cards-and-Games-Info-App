@@ -207,15 +207,16 @@ dv1.addEventListener('click', function() {
   getReleaseDate('dv1', 'Dragon Vault: ');
 });
 
-neo1.addEventListener('click', function() {
-  cardImg('111', 'neo1');
-  getReleaseDate('neo1', 'Hidden Legends: ');
-});
-
 ex5.addEventListener('click', function() {
   cardImg('102', 'ex5');
-  getReleaseDate('ex5', 'Neo Genesis: ');
+  getReleaseDate('ex5', 'Hidden Legends: ');
 });
+
+neo1.addEventListener('click', function() {
+  cardImg('111', 'neo1');
+  getReleaseDate('neo1', 'Neo Genesis: ');
+});
+
 
 //Clears all cards from screen
 var clearBtn = document.getElementById('clear');
